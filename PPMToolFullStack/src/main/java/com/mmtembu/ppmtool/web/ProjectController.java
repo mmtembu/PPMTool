@@ -26,7 +26,7 @@ public class ProjectController {
     /**
      * Annotation @PostMapping allows POST requests
      * Takes a Project object as Request. Checks if the object is valid.
-     * Saves the object in the projectService object and then returns the status code (e.g 200 OK, 400
+     * Saves the object in the projectService object and then returns the status code (e.g 200 OK, 400 server
      *  error) depending what the server returns.
      * @param project object which contains all the populated fields
      * @return status code

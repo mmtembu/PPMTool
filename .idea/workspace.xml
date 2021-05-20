@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38b3c116-92a4-4681-96c4-a16e925c42eb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_1_7_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_4_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PPMToolFullStack/src/main/java/com/mmtembu/ppmtool/exceptions/CustomResponseEntityExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PPMToolFullStack/src/main/java/com/mmtembu/ppmtool/exceptions/ProjectIdException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PPMToolFullStack/src/main/java/com/mmtembu/ppmtool/exceptions/ProjectIdExceptionResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PPMToolFullStack/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PPMToolFullStack/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PPMToolFullStack/src/main/java/com/mmtembu/ppmtool/domain/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/PPMToolFullStack/src/main/java/com/mmtembu/ppmtool/domain/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PPMToolFullStack.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PPMToolFullStack/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/PPMToolFullStack/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PPMToolFullStack/src/main/java/com/mmtembu/ppmtool/services/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PPMToolFullStack/src/main/java/com/mmtembu/ppmtool/services/ProjectService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PPMToolFullStack/src/main/java/com/mmtembu/ppmtool/web/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PPMToolFullStack/src/main/java/com/mmtembu/ppmtool/web/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ppmtool.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,13 +26,21 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="KotlinCodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
@@ -48,7 +58,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.1223582" />
     <property name="project.structure.side.proportion" value="0.12690353" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
