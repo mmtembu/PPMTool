@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -33,11 +30,18 @@ public class ProjectController {
      */
     @PostMapping("")
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result){
-
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-//        if(errorMap != null) return errorMap;
-
-//        Project project1 = this.projectService.saveOrUpdateProject(project);
         return errorMap != null ? errorMap : new ResponseEntity<Project>(this.projectService.saveOrUpdateProject(project), HttpStatus.CREATED);
+    }
+
+    /**
+     * Fetches an existing project by a given id, using GET Method
+     * @param projectId id of the project that has to be fetched
+     * @return returns the project and the OK status code
+     */
+    @GetMapping("/{projectId}")
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId){
+        Project project = projectService.findProjectByIdentifier(projectId.toUpperCase());
+        return new ResponseEntity<Project>(project, HttpStatus.OK);
     }
 }

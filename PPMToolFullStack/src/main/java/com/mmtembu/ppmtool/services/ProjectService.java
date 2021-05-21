@@ -12,7 +12,7 @@ public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
-
+    //Saves a project object, if there's an error then it throws an exception
     public Project saveOrUpdateProject(Project project){
         //A lot of logic has to go in here
         try{
@@ -21,5 +21,13 @@ public class ProjectService {
         }catch (Exception exception){
             throw new ProjectIdException("Project ID '"+project.getProjectIdentifier().toUpperCase()+"' already exists");
         }
+    }
+
+    //Finds a project, by a given ID. If it doesn't exist then it has to throw an exception
+    public Project findProjectByIdentifier(String projectId){
+        Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
+        if(project == null)
+            throw new ProjectIdException("Project ID '"+projectId.toUpperCase()+"' doesn't exist");
+        return project;
     }
 }
