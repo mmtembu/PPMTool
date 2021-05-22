@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProjectService {
-
     @Autowired
     private ProjectRepository projectRepository;
 
@@ -29,5 +28,9 @@ public class ProjectService {
         if(project == null)
             throw new ProjectIdException("Project ID '"+projectId.toUpperCase()+"' doesn't exist");
         return project;
+    }
+
+    public Iterable<Project> findAllProjects(){
+        return projectRepository.findAll();
     }
 }
