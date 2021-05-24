@@ -50,6 +50,16 @@ public class ProjectController {
         return projectService.findAllProjects();
     }
 
+    /**
+     * Using @RequestMapping instead of @DeleteMapping because it's not supported
+     * @RequestMapping allows us to specify the parameters. In our case we have the:
+     *   - value -> projectId
+     *   - produces -> application/json
+     *   - method -> {RequestMethod.DELETE}
+     *  The function deletes a project based on the projectId given.
+     * @param projectId
+     * @return
+     */
 //    @DeleteMapping("/{projectId}")
     @RequestMapping(
             value = "/{projectId}",
@@ -60,4 +70,5 @@ public class ProjectController {
         projectService.deleteProjectByIdentifier(projectId);
         return new ResponseEntity<String>("Project with ID: '"+projectId+"' was deleted", HttpStatus.OK);
     }
+
 }

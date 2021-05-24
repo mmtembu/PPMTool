@@ -34,6 +34,10 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
+    /**
+     * Service layer function that deletes a project by ID
+     * @param projectId project identifier which is a string object
+     */
     public void deleteProjectByIdentifier(String projectId){
         Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
         if(project == null){
