@@ -25,6 +25,7 @@ class AddProject extends Component {
 
     onSubmit(e){
         e.preventDefault();
+
         const newProject = {
             projectName:this.state.projectName,
             projectIdentifier:this.state.projectIdentifier,
