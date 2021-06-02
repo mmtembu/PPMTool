@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import { createProject } from '../../actions/projectActions';
+import classnames from "classnames";
 
 class AddProject extends Component {
 
@@ -34,14 +35,16 @@ class AddProject extends Component {
     onSubmit(e){
         e.preventDefault();
 
-        const newProject = {
-            projectName:this.state.projectName,
-            projectIdentifier:this.state.projectIdentifier,
-            description:this.state.description,
-            start_date:this.state.start_date,
-            end_date:this.state.end_date,
-        };
-        this.props.createProject(newProject, this.props.history)
+        if(this.state.start_date && this.state.end_date){//working on validation for the start_date and end_date
+            const newProject = {
+                projectName:this.state.projectName,
+                projectIdentifier:this.state.projectIdentifier,
+                description:this.state.description,
+                start_date:this.state.start_date,
+                end_date:this.state.end_date,
+            };
+            this.props.createProject(newProject, this.props.history)
+        }
     }
     
     render() {
@@ -58,31 +61,49 @@ class AddProject extends Component {
                                     <div className="form-group">
                                         <input 
                                             type="text" 
-                                            className="form-control form-control-lg " 
+                                            className={classnames("form-control form-control-lg",
+                                            {"is-invalid":errors.projectName})}
                                             placeholder="Project Name" 
                                             name="projectName"
                                             value={this.state.projectName}
                                             onChange={this.onChange}/>
-                                            <p className="text-danger">{errors.projectName}</p>
+                                            
+                                            {errors.projectName && ( //for errors
+                                                <div className="invalid-feedback">
+                                                    {errors.projectName}
+                                                </div>
+                                            )}
                                     </div>
                                     <div className="form-group">
                                         <input 
                                         type="text" 
-                                        className="form-control form-control-lg" 
+                                        className={classnames("form-control form-control-lg", 
+                                        {"is-invalid":errors.projectIdentifier})}
                                         placeholder="Unique Project ID"
                                         name="projectIdentifier"
                                         value={this.state.projectIdentifier}
                                         onChange={this.onChange}/>
-                                        <p className="text-danger">{errors.projectIdentifier}</p>
+                                    
+                                        { errors.projectIdentifier && ( //emmet learn more about it
+                                            <div className="invalid-feedback">
+                                                {errors.projectIdentifier}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="form-group">
                                         <textarea 
-                                            className="form-control form-control-lg" 
+                                            className={classnames("form-control form-control-lg",
+                                            {"is-invalid":errors.description})} 
                                             placeholder="Project Description"
                                             name="description"
                                             value={this.state.description}
                                             onChange={this.onChange}></textarea>
-                                            <p className="text-danger">{errors.description}</p>
+                                            
+                                            { errors.description && ( //for errors
+                                                <div className="invalid-feedback">
+                                                    {errors.description}
+                                                </div>
+                                            )}
                                     </div>
                                     <h6>Start Date</h6>
                                     <div className="form-group">
@@ -93,6 +114,14 @@ class AddProject extends Component {
                                             value={this.state.start_date}
                                             onChange={this.onChange}
                                             />
+
+                                            {
+                                                !this.state.description && (
+                                                    <div className="invalid-feedback">
+                                                        Cannot leave start date empty
+                                                    </div>
+                                                )
+                                            }
                                     </div>
                                     <h6>Estimated End Date</h6>
                                     <div className="form-group">
@@ -102,6 +131,13 @@ class AddProject extends Component {
                                             name="end_date"
                                             value={this.state.end_date}
                                             onChange={this.onChange}/>
+                                            {
+                                                !this.state.description &&
+                                                (<div className="invalid-feedback">
+                                                    Cannot leave end date empty
+                                                </div>
+                                                )
+                                            }
                                     </div>
 
                                     <input type="submit" className="btn btn-primary btn-block mt-4" />
