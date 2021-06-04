@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -21,11 +22,11 @@ public class Project {
     private String projectIdentifier;
     @NotBlank(message = "Project description required")
     private String description;
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
-    // @NotBlank(message = "Start date required")
     private Date start_date;
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
-    // @NotBlank(message = "End date required")
     private Date end_date;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date created_At;

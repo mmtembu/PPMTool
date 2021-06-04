@@ -109,19 +109,18 @@ class AddProject extends Component {
                                     <div className="form-group">
                                         <input 
                                             type="date"
-                                            className="form-control form-control-lg" 
+                                            className={classnames("form-control form-control-lg",
+                                            {"is-invalid":errors.start_date})}
                                             name="start_date"
+                                            required
                                             value={this.state.start_date}
                                             onChange={this.onChange}
                                             />
-
-                                            {
-                                                !this.state.description && (
-                                                    <div className="invalid-feedback">
-                                                        Cannot leave start date empty
-                                                    </div>
-                                                )
-                                            }
+                                            { errors.start_date && ( //for errors
+                                                <div className="invalid-feedback">
+                                                    {errors.start_date}
+                                                </div>
+                                            )}
                                     </div>
                                     <h6>Estimated End Date</h6>
                                     <div className="form-group">
@@ -129,12 +128,14 @@ class AddProject extends Component {
                                             type="date" 
                                             className="form-control form-control-lg" 
                                             name="end_date"
+                                            required
                                             value={this.state.end_date}
-                                            onChange={this.onChange}/>
-                                            {
-                                                !this.state.description &&
-                                                (<div className="invalid-feedback">
-                                                    Cannot leave end date empty
+                                            onChange={this.onChange}
+                                            />
+                                            {errors.end_date &&
+                                                (
+                                                <div className="invalid-feedback">
+                                                    {errors.end_date}
                                                 </div>
                                                 )
                                             }
