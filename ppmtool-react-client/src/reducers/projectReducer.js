@@ -5,7 +5,7 @@ const initialState = {
     project:{}
 };
 
-export default function (state = initialState, action){
+export default function projectReduce(state = initialState, action){
 
     switch(action.type){
         case GET_PROJECTS:
@@ -17,3 +17,5 @@ export default function (state = initialState, action){
             return state;
     }
 };
+
+// export default projectReduce;
