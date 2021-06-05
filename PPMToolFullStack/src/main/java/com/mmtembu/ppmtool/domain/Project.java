@@ -2,6 +2,8 @@ package com.mmtembu.ppmtool.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import org.hibernate.resource.beans.internal.FallbackBeanInstanceProducer;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,6 +31,7 @@ public class Project {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date end_date;
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(updatable = false)
     private Date created_At;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_At;
