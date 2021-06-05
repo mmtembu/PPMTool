@@ -19,4 +19,12 @@ export const getProjects = () => async dispatch =>{
         type:GET_PROJECTS,
         payload: res.data
     });
-}
+};
+
+export const getSingleProject = (id) => async dispatch => {
+    const res = await axios.get("http://locahost:8080/api/project/", id)
+    dispatch({
+        type:GET_PROJECTS,
+        payload: res.data
+    });
+};
