@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { getProject } from '../../actions/projectActions'
+import { getProject, createProject } from '../../actions/projectActions'
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { useRouteMatch } from 'react-router';
 
 class UpdateProject extends Component {
 
@@ -18,6 +17,9 @@ class UpdateProject extends Component {
             start_date:"",
             end_date:""
         };
+
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentWillReceiveProps(nextProps){
@@ -30,6 +32,7 @@ class UpdateProject extends Component {
             end_date
         } = nextProps.project
 
+        
         this.setState({
             id,
             projectName,
@@ -45,6 +48,23 @@ class UpdateProject extends Component {
         this.props.getProject(id, this.props.history);
     }
 
+    onChange(e){
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    onSubmit(e){
+        e.preventDefault();
+        const updateProject = {
+            id: this.state.id,
+            projectName: this.state.projectName,
+            projectIdentifier: this.state.projectIdentifier,
+            description: this.state.description,
+            start_date: this.state.start_date,
+            end_date: this.state.end_date
+        };
+        this.props.createProject(updateProject, this.props.history)
+    }
+
     render() {
         return (
             <div className="project">
@@ -53,14 +73,15 @@ class UpdateProject extends Component {
                         <div className="col-md-8 m-auto">
                             <h5 className="display-4 text-center">Update Project form</h5>
                             <hr />
-                            <form>
+                            <form onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <input 
                                         type="text" 
                                         className="form-control form-control-lg " 
                                         placeholder="Project Name"
                                         name="projectName"
-                                        defaultValue={this.state.projectName}/>
+                                        defaultValue={this.state.projectName}
+                                        onChange={this.onChange}/>
                                 </div>
                                 <div className="form-group">
                                     <input 
@@ -69,14 +90,16 @@ class UpdateProject extends Component {
                                         placeholder="Unique Project ID"
                                         disabled 
                                         name="projectIdentifier"
-                                        defaultValue={this.state.projectIdentifier}/>
+                                        defaultValue={this.state.projectIdentifier}
+                                        onChange={this.onChange}/>
                                 </div>
                                 <div className="form-group">
                                     <textarea 
                                         className="form-control form-control-lg" 
                                         placeholder="Project Description"
                                         name="description" 
-                                        defaultValue={this.state.description}></textarea>
+                                        defaultValue={this.state.description}
+                                        onChange={this.onChange}></textarea>
                                 </div>
                                 <h6>Start Date</h6>
                                 <div className="form-group">
@@ -84,7 +107,8 @@ class UpdateProject extends Component {
                                         type="date" 
                                         className="form-control form-control-lg" 
                                         name="start_date"
-                                        defaultValue={this.state.start_date}/>
+                                        defaultValue={this.state.start_date}
+                                        onChange={this.onChange}/>
                                 </div>
                                 <h6>Estimated End Date</h6>
                                 <div className="form-group">
@@ -92,7 +116,8 @@ class UpdateProject extends Component {
                                         type="date" 
                                         className="form-control form-control-lg" 
                                         name="end_date" 
-                                        defaultValue={this.state.end_date}/>
+                                        defaultValue={this.state.end_date}
+                                        onChange={this.onChange}/>
                                 </div>
 
                                 <input type="submit" className="btn btn-primary btn-block mt-4" />
@@ -107,8 +132,9 @@ class UpdateProject extends Component {
 
 UpdateProject.propTypes = {
     getProject: PropTypes.func.isRequired,
+    createProject: PropTypes.func.isRequired,
     project: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = state => ({
     project:state.project.project
@@ -116,5 +142,5 @@ const mapStateToProps = state => ({
 
 export default connect (
     mapStateToProps, 
-    {getProject}
+    {getProject, createProject}
 )(UpdateProject);
