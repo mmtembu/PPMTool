@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { getProject, createProject } from '../../actions/projectActions'
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 class UpdateProject extends Component {
 
@@ -32,6 +32,9 @@ class UpdateProject extends Component {
             end_date
         } = nextProps.project
 
+        if(nextProps.errors){
+            this.setState({errors: nextProps.errors})
+        }
         
         this.setState({
             id,
@@ -41,6 +44,18 @@ class UpdateProject extends Component {
             start_date, 
             end_date
         });
+
+        if(nextProps.error){
+            this.setState({errors: nextProps.errors})
+            console.log("Show me the errrors: ", this.state)
+        }
+    }
+
+    componentDidCatch(errorProps){
+        if(errorProps){
+            this.setState({errors:errorProps})
+        }
+        console.log(errorProps)
     }
 
     componentDidMount(){
@@ -53,16 +68,30 @@ class UpdateProject extends Component {
     }
 
     onSubmit(e){
+        
         e.preventDefault();
-        const updateProject = {
-            id: this.state.id,
-            projectName: this.state.projectName,
-            projectIdentifier: this.state.projectIdentifier,
-            description: this.state.description,
-            start_date: this.state.start_date,
-            end_date: this.state.end_date
-        };
-        this.props.createProject(updateProject, this.props.history)
+        // let notValid = false;
+
+        // if(!this.state.id 
+        //     || !this.state.projectName 
+        //     || !this.state.description 
+        //     || !this.state.start_date
+        //     ||this.state.end_date){
+
+        //     notValid = true;
+        // }
+
+        // if(!notValid){
+            const updateProject = {
+                id: this.state.id,
+                projectName: this.state.projectName,
+                projectIdentifier: this.state.projectIdentifier,
+                description: this.state.description,
+                start_date: this.state.start_date,
+                end_date: this.state.end_date
+            };
+            this.props.createProject(updateProject, this.props.history)
+        // }
     }
 
     render() {
@@ -73,14 +102,14 @@ class UpdateProject extends Component {
                         <div className="col-md-8 m-auto">
                             <h5 className="display-4 text-center">Update Project form</h5>
                             <hr />
-                            <form onSubmit={this.onSubmit}>
+                            <form onSubmit={this.onSubmit}> 
                                 <div className="form-group">
                                     <input 
                                         type="text" 
-                                        className="form-control form-control-lg " 
+                                        className="form-control form-control-lg "
                                         placeholder="Project Name"
                                         name="projectName"
-                                        defaultValue={this.state.projectName}
+                                        value={this.state.projectName}
                                         onChange={this.onChange}/>
                                 </div>
                                 <div className="form-group">
@@ -90,7 +119,7 @@ class UpdateProject extends Component {
                                         placeholder="Unique Project ID"
                                         disabled 
                                         name="projectIdentifier"
-                                        defaultValue={this.state.projectIdentifier}
+                                        value={this.state.projectIdentifier}
                                         onChange={this.onChange}/>
                                 </div>
                                 <div className="form-group">
@@ -98,7 +127,7 @@ class UpdateProject extends Component {
                                         className="form-control form-control-lg" 
                                         placeholder="Project Description"
                                         name="description" 
-                                        defaultValue={this.state.description}
+                                        value={this.state.description}
                                         onChange={this.onChange}></textarea>
                                 </div>
                                 <h6>Start Date</h6>
@@ -107,7 +136,7 @@ class UpdateProject extends Component {
                                         type="date" 
                                         className="form-control form-control-lg" 
                                         name="start_date"
-                                        defaultValue={this.state.start_date}
+                                        value={this.state.start_date}
                                         onChange={this.onChange}/>
                                 </div>
                                 <h6>Estimated End Date</h6>
@@ -116,7 +145,7 @@ class UpdateProject extends Component {
                                         type="date" 
                                         className="form-control form-control-lg" 
                                         name="end_date" 
-                                        defaultValue={this.state.end_date}
+                                        value={this.state.end_date}
                                         onChange={this.onChange}/>
                                 </div>
 
@@ -137,7 +166,8 @@ UpdateProject.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    project:state.project.project
+    project:state.project.project,
+    errors: state.errors
 });
 
 export default connect (
